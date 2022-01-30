@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.config=void 0,process.env.NODE_ENV=process.env.NODE_ENV||"development",exports.config={port:process.env.PORT||3e3};
