@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "glob-parent": "^6.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-nodemon": "^2.5.0",
     "gulp-uglify": "^3.0.2",
