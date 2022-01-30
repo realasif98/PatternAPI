@@ -1,6 +1,6 @@
 {
   "name": "patternapi",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This api is basically used to simplify the use of regex patterns",
   "main": "src/app.js",
   "scripts": {
