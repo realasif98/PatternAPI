@@ -1,5 +1,3 @@
-var exec = require('child_process').exec;
-
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var notify = require("gulp-notify");
