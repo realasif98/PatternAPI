@@ -1,0 +1,34 @@
+{
+  "name": "patternapi",
+  "version": "1.0.1",
+  "description": "This api is basically used to simplify the use of regex patterns",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realasif98/PatternAPI.git"
+  },
+  "author": "Mohammad Asif",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/realasif98/PatternAPI/issues"
+  },
+  "homepage": "https://github.com/realasif98/PatternAPI#readme",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "cors": "^2.8.5",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "nodemon": "^2.0.15"
+  }
+}
