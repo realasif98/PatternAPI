@@ -7,8 +7,6 @@ var babel = require('gulp-babel');
 // var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-
-
 gulp.task('scripts', function() {
     var tsResult = tsProject.src() // or tsProject.src()
         .pipe(tsProject());

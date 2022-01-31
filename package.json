@@ -37,5 +37,8 @@
     "gulp-notify": "^4.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }

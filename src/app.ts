@@ -24,11 +24,6 @@ export function startServer(){
                 body: {}
             }) 
     })    
-
-    //send a hello msg from server
-    app.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-        res.send("Hello");    
-    })
      
     //attach the patternController
     app.use('/api/v1/pattern', router);
