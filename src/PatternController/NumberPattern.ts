@@ -1,18 +1,17 @@
 import express from 'express'
+import { ErrorMessage, Phone } from '../constant/Constant';
 import { MObileNumberDetail } from "../Models/MobileNumDetails";
 
-let validationResult = (requestBody: MObileNumberDetail[]) => { 
+let validationResult = (requestBody: MObileNumberDetail[]) : Array<string> => { 
     let validationErrors: Array<string> = [];
-
     requestBody.forEach(requestData => {        
         if(!(requestData.country && requestData.country.length >= 2)){
-                validationErrors.push("Country Name is invalid.");
+                validationErrors.push(ErrorMessage.INVALID_CC);
         }
-        if(!(requestData.phone && requestData.phone.length >= 7)){
-                validationErrors.push("Phone number is invalid.");
+        if(!(requestData.phone && requestData.phone.length >= Phone.MinLength && requestData.phone.length <= Phone.MaxLength)){
+                validationErrors.push(ErrorMessage.INVALID_PHONE);
         }
     });
-
     return validationErrors;
 }
 
@@ -26,11 +25,51 @@ let validateAllTypesPattern = async (phoneNumber: string): Promise<boolean> => {
 
 
 let indianPatternInfo = async(req : express.Request, res: express.Response) => {
-
-        let str = 'Indian Mobile Number Format: [+][country code][area code][local phone number]\nCountry Code: 91\nArea Code: Between 2 to 4\nLocal Phone Number: 6 to 8\nExample: 9760064000, +91-9760064000, 919760064000, +91-(976)0064000, +91-(976)006-4000';
-
+        let str = 'Mobile Number Format: [+][country code][area code][local phone number]\nCountry Code: 91\nArea Code: Between 2 to 4\nLocal Phone Number: 6 to 8\nExample: 9760064000, +91-9760064000, 919760064000, +91-(976)0064000, +91-(976)006-4000';
         res.send(str);
 }
+
+// possible patterns 91, +91, 91-, +91-
+let initialPattern = (phone: string):string => {       
+        let initialPattern = new RegExp(/^[+]?((91-)|(91))?(-| |)?/);
+        let res = phone.match(initialPattern);
+        return  res != null ? res[0] : '' ;  
+}
+
+// check for basic pattern
+let pattern1 = (phone: string): boolean => {
+        return new RegExp(/^[\d]{10}$/).test(phone); 
+}
+
+//check for more advance pattern (2 + 8), (3 + 7), (4 + 6), (5 + 5) 
+let pattern2 = (phone: string): boolean => {
+        let firstIndex = phone.search(/(-| )/)
+        let remainingLen = Phone.NomralLength - firstIndex;
+        if(firstIndex >= 2 && firstIndex <= 5){
+                let regExp = "[\\d]{" + firstIndex  + "}(-| )[\\d]{" + remainingLen + "}$"
+                return new RegExp("\\b" + regExp + "\\b").test(phone);
+        }
+        return false;     
+}
+
+
+//check for more advance pattern 3 + 3 + 4
+let pattern5 = (phone: string): boolean => {
+        return new RegExp(/[\d]{3}(-| )[\d]{3}(-| )[\d]{4}$/).test(phone);
+}
+
+let checkPattern = async (phone: string, checkInitial: boolean = false): Promise<boolean> => {
+        //len of string must be in between 
+        if(phone.length < 8){
+                return false;
+        }
+        //check and return the initial of number 
+        let initial = checkInitial ? initialPattern(phone) : '';
+        //remove the initial from the phone number and then verify the remaining
+        return  pattern1(phone.replace(initial, ''));
+}
+
+
 
 let basicPhoneNumberPattern = async (phoneNumber : string): Promise<boolean> => { 
         let matcher = new RegExp(/^([+]?((91)|(91-))?[\d]{10})*$/);
@@ -87,9 +126,12 @@ let checkOnePattern = async(req: express.Request, res: express.Response) => {
         }
         let result : Boolean[] = [];
         for(let data of requestBody){
-                result.push(await validateAllTypesPattern(data.phone));
+                result.push(await checkPattern(data.phone, true));
         }
         res.send(result);
 }
 
-export {checkOnePattern, checkAllIndianPatterns, indianPatternInfo}
+
+
+
+export {checkOnePattern, checkAllIndianPatterns, indianPatternInfo, pattern1}

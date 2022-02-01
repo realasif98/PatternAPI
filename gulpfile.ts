@@ -22,7 +22,7 @@ gulp.task('server', function() {
     // configure nodemon
     nodemon({
         // the script to run the app
-        script: 'dist/app.js',
+        script: 'src/app.ts',
         // this listens to changes in any of these files/routes and restarts the application
         watch: "src/**/*.ts",
         tasks:['scripts'],
