@@ -1,15 +1,13 @@
 import express from "express";
-import { validateBody } from "../ModelValidation/modelValidation";
-import {  checkAllIndianPatterns, checkOnePattern, indianPatternInfo } from "../PatternController/NumberPattern";
-import { MObileNumberDetail } from "../Models/MobileNumDetails";
+import {  checkAllIndianPatterns, checkOnePattern, phonePatternInfo } from "../PatternController/NumberPattern";
 
 const router = express.Router();
 
 
-router.get('/getInfo', indianPatternInfo);
+router.get('/getInfo', phonePatternInfo);
 router.post('/checkOne', checkOnePattern);
 router.post('/checkAll', checkAllIndianPatterns);
 
 
 
-export {router}
+export {router};

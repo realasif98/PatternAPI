@@ -22,8 +22,8 @@ export function startServer(){
                 msg: err.message,
                 status: 500,
                 body: {}
-            }) 
-    })    
+            });
+    }); 
      
     //attach the patternController
     app.use('/api/v1/pattern', router);
@@ -31,8 +31,7 @@ export function startServer(){
     //start listening on specified port 
     app.listen(config.port, ()=> {
         console.log(`app listening on port ${config.port}`);
-    }) 
-
+    });
 }
  
-startServer();
+startServer(); 
