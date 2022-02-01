@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.ErrorMessage=exports.Phone=void 0;let Phone={MinLength:7,MaxLength:14,NomralLength:10},ErrorMessage=(exports.Phone=Phone,{INVALID_PHONE:"Phone Number is invalid.",INVALID_CC:"Country Name is invalid."});exports.ErrorMessage=ErrorMessage;

@@ -1,70 +1,72 @@
 import { expect } from 'chai';
 import 'mocha';
-import { checkOnePattern, indianPatternInfo, pattern1 } from '../PatternController/NumberPattern';
+import { checkOnePattern, checkPattern, indianPatternInfo, pattern1, pattern3 } from '../PatternController/NumberPattern';
+import { TestData } from './TestData';
 
-let testdata: Array<string> = [
-  '1234567890', '911234567890', '+911234567890', '91-1234567890', '+91-1234567890',
-  '12 34567890', '12-34567890', '91-12 34567890', '91-12-34567890', '+91-12 34567890', '+91-12-34567890', '+9112 34567890', '+9112-34567890',
-  '123 4567890', '123-4567890', '91-123 4567890', '91-123-4567890', '+91-123 4567890', '+91-123-4567890', '+91123 4567890', '+91123-4567890',
-  '1234 567890', '1234-567890', '91-1234 567890', '91-1234-567890', '+91-1234 567890', '+91-1234-567890', '+911234 567890', '+911234-567890',
-  '12345 67890', '12345 67890', '91-12345 67890', '91-12345 67890', '+91-12345 67890', '+91-12345 67890', '+9112345 67890', '+9112345 67890',
-]
+let testData: Array<string> ;
 
-let testDataP1: Array<string> = [
-  '1234567890', 
-  '911234567890','91 1234567890', 
-  '+911234567890', '+91 1234567890', 
-  '91-1234567890', 
-  '+91-1234567890'
-]
-let testDataP2: Array<string> = [
-  '12 34567890', '12-34567890',
-  '91 12 34567890', '91 12-34567890', 
-  '91-12 34567890', '91-12-34567890', 
-  '+91 12 34567890', '+91 12-34567890', 
-  '+91-12 34567890', '+91-12-34567890', 
-  '+9112 34567890', '+9112-34567890'
-]
-let testDataP3: Array<string> = [
-  '123 4567890', '123-4567890', 
-  '91 123 4567890', '91 123-4567890',
-  '91-123 4567890', '91-123-4567890', 
-  '+91 123 4567890', '+91 123-4567890',
-  '+91-123 4567890', '+91-123-4567890', 
-  '+91123 4567890', '+91123-4567890'
-]
-let testDataP4: Array<string> = [
-  '1234 567890', '1234-567890', 
-  '91 1234 567890', '91 1234-567890', 
-  '91-1234 567890', '91-1234-567890', 
-  '+91 1234 567890', '+91 1234-567890', 
-  '+91-1234 567890', '+91-1234-567890', 
-  '+911234 567890', '+911234-567890'
-]
-let testDataP5: Array<string> = [
-  '12345 67890', '12345 67890', 
-  '91 12345 67890', '91 12345 67890', 
-  '91-12345 67890', '91-12345 67890', 
-  '+91 12345 67890', '+91 12345 67890', 
-  '+91-12345 67890', '+91-12345 67890', 
-  '+9112345 67890', '+9112345 67890'
-]
-let testDataP6: Array<string> = [
-  '123 456 7890', '123-456-7890', 
-  '91 123 456 7890', '91 123-456-7890',
-  '91-123 456 7890', '91-123-456-7890', 
-  '+91 123 456 7890', '+91 123-456-7890',
-  '+91-123 456 7890', '+91-123-456-7890', 
-  '+91123 456 7890', '+91123-456-7890'
-]
+describe('Check All types of Pattern1', 
+  () => {
+    let testData: Array<string> = TestData.testDataP1;
+    for(let index in testData){
+      it(`testing phone number at index ${index} `, async () => {
+        const result = await checkPattern(testData[index], true);
+        expect(result).to.equal(true) ;
+      });
+    }
+});
 
-describe('First test', 
-  () => { 
-    before('Prepare the Test Data', () => {
-      
-    }),
-    it('should return true', () => { 
-      const result =  pattern1("7210166106");
-      expect(result).to.equal(true); 
-  }); 
+describe('Check All types of Pattern2', 
+  () => {
+    let testData: Array<string> = TestData.testDataP2;
+    for(let index in testData){
+      it(`testing phone number at index ${index} `, async () => {
+        const result = await checkPattern(testData[index], true);
+        expect(result).to.equal(true) ;
+      });
+    } 
+});
+
+describe('Check All types of Pattern3', 
+  () => {
+    let testData: Array<string> = TestData.testDataP3;
+    for(let index in testData){
+      it(`testing phone number at index ${index} `, async () => { 
+        const result = await checkPattern(testData[index], true);
+        expect(result).to.equal(true) ; 
+    });
+  } 
+});
+
+describe('Check All types of Pattern4', 
+  () => {
+    let testData: Array<string> = TestData.testDataP4;
+    for(let index in testData){
+      it(`testing phone number at index ${index} `, async() => { 
+        const result = await checkPattern(testData[index], true);
+        expect(result).to.equal(true) ; 
+    });
+  } 
+});
+
+describe('Check All types of Pattern5', 
+  () => {
+    let testData: Array<string> = TestData.testDataP5;
+    for(let index in testData){
+      it(`testing phone number at index ${index} `, async() => { 
+        const result = await checkPattern(testData[index], true);
+        expect(result).to.equal(true) ; 
+    });
+  } 
+});
+
+describe('Check All types of Pattern6', 
+  () => {
+    let testData: Array<string> = TestData.testDataP6;
+    for(let index in testData){
+      it(`testing phone number at index ${index} `, async () => { 
+        const result = await checkPattern(testData[index], true);
+        expect(result).to.equal(true) ; 
+    });
+  } 
 });

@@ -46,27 +46,23 @@ let pattern2 = (phone: string): boolean => {
         let firstIndex = phone.search(/(-| )/)
         let remainingLen = Phone.NomralLength - firstIndex;
         if(firstIndex >= 2 && firstIndex <= 5){
-                let regExp = "[\\d]{" + firstIndex  + "}(-| )[\\d]{" + remainingLen + "}$"
+                let regExp = "^[\\d]{" + firstIndex  + "}(-| )[\\d]{" + remainingLen + "}$"
                 return new RegExp("\\b" + regExp + "\\b").test(phone);
         }
         return false;     
 }
 
-
 //check for more advance pattern 3 + 3 + 4
-let pattern5 = (phone: string): boolean => {
-        return new RegExp(/[\d]{3}(-| )[\d]{3}(-| )[\d]{4}$/).test(phone);
+let pattern3 = (phone: string): boolean => {
+        return new RegExp(/^[\d]{3}(-| )[\d]{3}(-| )[\d]{4}$/).test(phone);
 }
 
 let checkPattern = async (phone: string, checkInitial: boolean = false): Promise<boolean> => {
-        //len of string must be in between 
-        if(phone.length < 8){
-                return false;
-        }
         //check and return the initial of number 
         let initial = checkInitial ? initialPattern(phone) : '';
+        let main_number = phone.replace(initial, '');
         //remove the initial from the phone number and then verify the remaining
-        return  pattern1(phone.replace(initial, ''));
+        return  pattern1(main_number) || pattern2(main_number) || pattern3(main_number);
 }
 
 
@@ -134,4 +130,4 @@ let checkOnePattern = async(req: express.Request, res: express.Response) => {
 
 
 
-export {checkOnePattern, checkAllIndianPatterns, indianPatternInfo, pattern1}
+export {checkOnePattern, checkAllIndianPatterns, indianPatternInfo, checkPattern, pattern1, pattern2, pattern3}
