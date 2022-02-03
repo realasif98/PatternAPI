@@ -1,3 +1,10 @@
 #### PatternAPI
 ----
-This package is basically used to simplify the use of different type of mobile number matching regex. It basically covers all types of pattern specially for indian mobile numbers.
+PatternAPI is a mobile number pattern matching api. This api consist of more than 75 diffeent types of pattern used to write indian mobile numbers. It can validate all of these types of pattern.
+It's good to store the numbers in some common format when you are working with a large data-source. 
+
+
+
+#### Future Implementation
+1. After Validation of pattern also transform the number into a desirable pattern.
+2. There will be 4-10 different types of standered pattern in future
