@@ -33,7 +33,7 @@ const pattern1 = (phone: string): boolean => {
         return new RegExp(/^[\d]{10}$/).test(phone); 
 };
 
-//check for more advance pattern (2 + 8), (3 + 7), (4 + 6), (5 + 5) 
+//check for advance pattern (2 + 8), (3 + 7), (4 + 6), (5 + 5) 
 const pattern2 = (phone: string): boolean => {
         const firstIndex = phone.search(/(-| )/);
         const remainingLen = Phone.NomralLength - firstIndex;
@@ -52,6 +52,7 @@ const pattern3 = (phone: string): boolean => {
 const checkPattern = async (phone: string, checkInitial = false): Promise<boolean> => {
         //check and return the initial of number 
         const initial = checkInitial ? initialPattern(phone) : '';
+        //remove the initial from number
         const main_number = phone.replace(initial, '');
         //remove the initial from the phone number and then verify the remaining
         return  pattern1(main_number) || pattern2(main_number) || pattern3(main_number);
