@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { checkPattern } from '../PatternController/NumberPattern';
+import { checkPattern } from '../PatternController/ValidatePattern';
 import { TestData } from './TestData';
 
 let testData: Array<string> ;

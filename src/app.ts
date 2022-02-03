@@ -1,6 +1,7 @@
 import cors from "cors";
 import express, { NextFunction } from "express";
 import { config } from './config/serverConfig';
+import { validateBody } from "./Middleware/modelValidation";
 import { router } from "./routes/routes";
 
 
@@ -13,6 +14,8 @@ export function startServer(){
 
     //convert the request into json format
     app.use(express.json());
+
+    app.use(validateBody);
 
     //middleware to send a beautiful msg on error
     app.use(function (err: Error, req: express.Request, res: express.Response, next: express.NextFunction){
