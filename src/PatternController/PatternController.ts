@@ -1,4 +1,5 @@
 import express from 'express';
+import { ErrorMessage, ErrorMessageStatus, Phone } from '../constant/Constant';
 import { MObileNumberDetail } from '../Models/MobileNumDetails';
 import { transformPattern } from './TransformPattern';
 import { checkPattern, } from './ValidatePattern';
@@ -9,8 +10,18 @@ import { checkPattern, } from './ValidatePattern';
  * @param {express.Response} res => a string format info about the phone number format
  */
 const phonePatternInfo = async(req : express.Request, res: express.Response) => {
-    const str = 'Mobile Number Format: [+][country code][area code][local phone number]\nCountry Code: 91\nArea Code: Between 2 to 4\nLocal Phone Number: 6 to 8\nExample: 9760064000, +91-9760064000, 919760064000, +91-(976)0064000, +91-(976)006-4000';
-    res.send(str);
+    res.send(Phone.BasicInfo);
+};
+
+/**
+ * @param {express.Request} req
+ * @param {express.Response} res => A single boolean value
+ */
+ const checkOnePattern = async(req: express.Request, res: express.Response) => {
+    const requestBody = req.body as MObileNumberDetail;
+    const isValidNumber = await checkPattern(requestBody.phone, true);
+    const result = isValidNumber ? true : ErrorMessageStatus.INVALID_NUMBER;
+    res.send(result);
 };
 
 /**
@@ -19,24 +30,12 @@ const phonePatternInfo = async(req : express.Request, res: express.Response) => 
  */
 const checkAllIndianPatterns = async(req: express.Request, res: express.Response) => {
     const requestBody = req.body as MObileNumberDetail[];
-    const result : boolean[] = [];
+    const response : (boolean|string)[] = [];
     for(const data of requestBody){
-            result.push(await checkPattern(data.phone, true));
+            const result = await checkPattern(data.phone, true)? true: ErrorMessageStatus.INVALID_NUMBER;
+            response.push(result);
     }
-    res.send(result);
-};
-
-/**
- * @param {express.Request} req
- * @param {express.Response} res => A single boolean value
- */
-const checkOnePattern = async(req: express.Request, res: express.Response) => {
-    const requestBody = [req.body as MObileNumberDetail];
-    const result : boolean[] = [];
-    for(const data of requestBody){
-            result.push(await checkPattern(data.phone, true));
-    }
-    res.send(result);
+    res.send(response);
 };
 
 /**
@@ -44,12 +43,14 @@ const checkOnePattern = async(req: express.Request, res: express.Response) => {
  * @param {express.Response} res => A single formatted number
  */
  const transformSinglePattern = async(req: express.Request, res: express.Response) => {
-    const requestBody = [req.body as MObileNumberDetail]; 
-    const result : string[] = [];
-    for(const data of requestBody){
-            result.push(await transformPattern(data.phone, data.type, data.countryCode, data.separator, data.index));
+    const requestBody = req.body as MObileNumberDetail; 
+    const isValidNumber = await checkPattern(requestBody.phone, true);
+    if(isValidNumber){
+        const result = await transformPattern(requestBody);    
+        res.send(result);
+        return;
     }
-    res.send(result);
+    res.status(500).send(ErrorMessageStatus.NOT_VALID_PATTERN);
 };
 
 export {phonePatternInfo, checkOnePattern, checkAllIndianPatterns, transformSinglePattern};

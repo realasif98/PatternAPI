@@ -3,25 +3,6 @@ import { ErrorMessage, Phone } from '../constant/Constant';
 import { ErrorModel } from '../Models/ErrorModel';
 import { MObileNumberDetail } from "../Models/MobileNumDetails";
 
-// /**
-//  * Validate the request data
-//  * @constructor
-//  * @param {MObileNumberDetail[]} requestBody - contain the req body send in request.
-//  * @return {ErrorModel} - returns the list of invalid requestData
-//  */
-// const validationResult = (requestBody: MObileNumberDetail[]) : Array<ErrorModel> => { 
-//     const validationErrors: Array<ErrorModel> = [];
-//     requestBody.forEach(requestData => {        
-//         if(!(requestData.country && requestData.country.length >= 2)){
-//                 validationErrors.push(new ErrorModel(ErrorMessage.INVALID_CC, requestData.country));
-//         }
-//         if(!(requestData.phone && requestData.phone.length >= Phone.MinLength && requestData.phone.length <= Phone.MaxLength)){
-//                 validationErrors.push(new ErrorModel(ErrorMessage.INVALID_PHONE, requestData.phone));
-//         }
-//     });
-//     return validationErrors;
-// };
-
 
 /**
  * Validate the Country Code: 91, +91, 91-, +91-

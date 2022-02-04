@@ -1,14 +1,18 @@
+
 class ErrorModel {
-    msg: string;
-    phone: string;
-    constructor(msg: string, phone: string){
-           this.msg = msg;
-           this.phone = phone;
+    ErrorMessage: string;
+    Property: string;
+    constructor(ErrorMessage: string, Property: string){
+           this.ErrorMessage = ErrorMessage;
+           this.Property = Property;
     }
 }
 
-// ErrorModel.prototype.toString = function dogToString() {
-//     return 'Messge: ' + this.msg +  'Element: ' + this.element;
-// };
+const Prop = {
+    PHONE : 'phone',
+    TYPE : 'type',
+    SEPARATOR: 'separator',
+    INDEX: 'index'
+};
 
-export {ErrorModel};
+export {ErrorModel, Prop};
