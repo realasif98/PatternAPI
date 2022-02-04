@@ -2,7 +2,10 @@ const Phone = {
 
     MinLength : 7,
     MaxLength : 16,
-    NomralLength : 10
+    NomralLength : 10,
+    CountryCode : "+91-",
+    Separator:"-",
+    MinIndex: 2
 };
 
 const ErrorMessage = { 

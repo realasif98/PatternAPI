@@ -1,5 +1,6 @@
 import express from 'express';
 import { MObileNumberDetail } from '../Models/MobileNumDetails';
+import { transformPattern } from './TransformPattern';
 import { checkPattern, } from './ValidatePattern';
 
 
@@ -38,4 +39,17 @@ const checkOnePattern = async(req: express.Request, res: express.Response) => {
     res.send(result);
 };
 
-export {phonePatternInfo, checkOnePattern, checkAllIndianPatterns};
+/**
+ * @param {express.Request} req
+ * @param {express.Response} res => A single formatted number
+ */
+ const transformSinglePattern = async(req: express.Request, res: express.Response) => {
+    const requestBody = [req.body as MObileNumberDetail]; 
+    const result : string[] = [];
+    for(const data of requestBody){
+            result.push(await transformPattern(data.phone, data.type, data.countryCode, data.separator, data.index));
+    }
+    res.send(result);
+};
+
+export {phonePatternInfo, checkOnePattern, checkAllIndianPatterns, transformSinglePattern};

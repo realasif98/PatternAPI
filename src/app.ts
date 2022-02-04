@@ -13,11 +13,9 @@ export function startServer(){
     app.use(cors());
 
     //convert the request into json format
-    app.use(express.json());
+    app.use(express.json());   
 
-    app.use(validateBody);
-
-    //middleware to send a beautiful msg on error
+    //middleware to send a msg on error
     app.use(function (err: Error, req: express.Request, res: express.Response, next: express.NextFunction){
         console.log(err);
         res.status(500).send(
@@ -30,6 +28,8 @@ export function startServer(){
      
     //attach the patternController
     app.use('/api/v1/pattern', router);
+
+    app.use(validateBody);
     
     //start listening on specified port 
     app.listen(config.port, ()=> {
