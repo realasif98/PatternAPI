@@ -55,7 +55,8 @@
   },
   "resolutions": {
     "glob-parent": "^5.1.2",
-    "ansi-regex": "^5.0.1"
+    "ansi-regex": "^5.0.1",
+    "postcss": "^8.2.13"
   },
   "engines": {
     "node": "12.x"
