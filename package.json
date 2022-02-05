@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "test": "nyc --reporter=text --all=true --include='src/**/*.ts' --exclude='src/**/*.spec.ts' mocha -r ts-node/register src/tests/**/*.spec.ts",
+    "test": "nyc --reporter=text --all=true --include='src/**/*.ts' --exclude='src/**/*.spec.ts', --exclude='src/routes/*.ts' --exclude='src/config/*.ts' mocha -r ts-node/register src/tests/**/*.spec.ts",
     "build": "gulp",
     "lint": "eslint src/",
     "start": "gulp server"
