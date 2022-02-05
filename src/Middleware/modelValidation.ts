@@ -6,7 +6,7 @@ import { ErrorMessage, Phone } from "../constant/Constant";
 const validateObjectSchema = (requestBody: MObileNumberDetail[]) => {
    const validationErrors: Array<ErrorModel> = [];
     requestBody.forEach(requestData => {        
-        if(!(requestData.type && (requestData.type >= 1 && requestData.type <= 3))){
+        if(!(requestData.type && !isNaN(requestData.type) && (requestData.type >= 1 && requestData.type <= 2))){
                 validationErrors.push(new ErrorModel(ErrorMessage.INVALID_TYPE_VALUE, Prop.TYPE));
         }
         if(!(requestData.phone && requestData.phone.length >= Phone.MinLength && requestData.phone.length <= Phone.MaxLength)){
@@ -15,7 +15,7 @@ const validateObjectSchema = (requestBody: MObileNumberDetail[]) => {
         if(requestData.separator && requestData.separator.length > 1){
                 validationErrors.push(new ErrorModel(ErrorMessage.INVALID_SEPARATOR, Prop.SEPARATOR));
         }
-        if(requestData.index && (requestData.index < 1  || requestData.index > 5)){
+        if(requestData.index && !isNaN(requestData.index) &&  (requestData.index < 1  || requestData.index > 5)){
                 validationErrors.push(new ErrorModel(ErrorMessage.INVALID_INDEX, Prop.INDEX));
         }
     });

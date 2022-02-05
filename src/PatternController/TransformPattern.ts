@@ -1,5 +1,6 @@
 import { Phone } from "../constant/Constant";
 import { MObileNumberDetail } from "../Models/MobileNumDetails";
+import { initialPattern } from "./ValidatePattern";
 
 
 /**
@@ -7,9 +8,9 @@ import { MObileNumberDetail } from "../Models/MobileNumDetails";
  * @param {countryCode} string - contain contry Code
  * @returns {string} - return one of the accepted format  // +91-1234567890
  */
-const transformPattern1 = (phone: string, countryCode = Phone.CountryCode ): string => {
+const transformPattern1 = (phone: string ): string => {
     const regex = new RegExp(/(-| )/g);
-    const res = countryCode +  phone.replace(regex, '');
+    const res =  phone.replace(regex, '');
     return res;
 };
 
@@ -29,14 +30,20 @@ const transformPattern1 = (phone: string, countryCode = Phone.CountryCode ): str
  * @returns {string} - return the transformed number // +91-123-4567890
  */
 export const transformPattern = async(request: MObileNumberDetail): Promise<string> => {
-    let res = transformPattern1(request.phone, request.countryCode);
+    let countryCode = request.countryCodeIncluded? initialPattern(request.phone) : '';
+    const main_number = request.phone.replace(countryCode, '');
+    countryCode = request.countryCode != undefined ? 
+                                request.countryCode : (countryCode.length >= 2 ? countryCode : Phone.CountryCode);
+    let res = '';
     const type = Number(request.type);
     switch(type){
         case 1: 
+            res = transformPattern1(main_number);
             break;
         case 2:
-            res = transformPattern2(res, request.separator, request.index);
+            res = transformPattern2(main_number, request.separator, request.index);
             break;
     }
+    res = countryCode + res;
     return res;
 };

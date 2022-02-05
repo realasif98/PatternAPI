@@ -28,7 +28,7 @@ const phonePatternInfo = async(req : express.Request, res: express.Response) => 
  * @param {express.Request} req
  * @param {express.Response} res => A list of boolean values
  */
-const checkAllIndianPatterns = async(req: express.Request, res: express.Response) => {
+const checkAllPatterns = async(req: express.Request, res: express.Response) => {
     const requestBody = req.body as MObileNumberDetail[];
     const response : (boolean|string)[] = [];
     for(const data of requestBody){
@@ -44,13 +44,24 @@ const checkAllIndianPatterns = async(req: express.Request, res: express.Response
  */
  const transformSinglePattern = async(req: express.Request, res: express.Response) => {
     const requestBody = req.body as MObileNumberDetail; 
-    const isValidNumber = await checkPattern(requestBody.phone, true);
-    if(isValidNumber){
-        const result = await transformPattern(requestBody);    
-        res.send(result);
-        return;
-    }
-    res.status(500).send(ErrorMessageStatus.NOT_VALID_PATTERN);
+    const isValidNumber = await checkPattern(requestBody.phone, requestBody.countryCodeIncluded);
+    const result = isValidNumber ? await transformPattern(requestBody) : ErrorMessageStatus.INVALID_NUMBER;
+    res.send(result);
 };
 
-export {phonePatternInfo, checkOnePattern, checkAllIndianPatterns, transformSinglePattern};
+/**
+ * @param {express.Request} req
+ * @param {express.Response} res => A single formatted number
+ */
+ const transformAllPatterns = async(req: express.Request, res: express.Response) => {
+    const requestBody = req.body as MObileNumberDetail[]; 
+    const response : string[] = [];
+    for(const data of requestBody){
+            const isValidNumber = await checkPattern(data.phone, data.countryCodeIncluded);
+            const result = isValidNumber ? await transformPattern(data) : ErrorMessageStatus.INVALID_NUMBER;
+            response.push(result);
+    }
+    res.send(response);
+};
+
+export {phonePatternInfo, checkOnePattern, checkAllPatterns, transformSinglePattern, transformAllPatterns};

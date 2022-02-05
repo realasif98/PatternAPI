@@ -70,4 +70,4 @@ const checkPattern = async (phone: string, checkInitial = false): Promise<boolea
 };
 
 
-export { checkPattern};
+export { checkPattern, initialPattern};

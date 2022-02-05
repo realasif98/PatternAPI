@@ -14,14 +14,14 @@ const Phone = {
 const ErrorMessage = { 
     INVALID_PHONE : "Phone Number length is not in allowed range.",
     INVALID_CC : "Country Name length is not in allowed range.",
-    INVALID_TYPE_VALUE: "Value of type must be in between 1 to 3.",
+    INVALID_TYPE_VALUE: "Property type must be a number and it's value must be either 1 or 2.",
     INVALID_SEPARATOR: "Separator Can not be more than 1 character.",
-    INVALID_INDEX: "Index must be in range between 2 to 5."
+    INVALID_INDEX: "Property index must be a number and should be in range between 2 to 5."
 };
 
 const ErrorMessageStatus = {
     NOT_VALID_PATTERN: "Phone number Pattern is not valid. Cannot be transformed.",
-    INVALID_NUMBER: "Not a Valid Pattern"
+    INVALID_NUMBER: "Not a Valid Phone Number Pattern"
 };
 
 
