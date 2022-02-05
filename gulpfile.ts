@@ -7,6 +7,7 @@ var babel = require('gulp-babel');
 var uglify = require('gulp-uglify'); 
 var size = require('gulp-size');
 var eslint = require('gulp-eslint');
+var sourcemaps = require("gulp-sourcemaps");
 
 gulp.task('liniting', () => {
     return gulp

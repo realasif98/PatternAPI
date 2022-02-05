@@ -103,6 +103,6 @@
   ],
   "exclude": [
     "node_modules",
-    "tests"
+    "./src/**/*.spec.ts"
   ]
 }
