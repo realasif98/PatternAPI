@@ -13,7 +13,6 @@
 6. Eslint for proper formatting of code.
 
 
-
-#### Future Implementation
-1. After Validation of pattern also transform the number into a desirable pattern.
-2. There will be 4-10 different types of standered pattern in future
+#### Tools to be use:
+1. Docekrization of whole api.
+2. Centralized Logging tool.
