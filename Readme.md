@@ -2,6 +2,7 @@
 ----
 1. PatternAPI is a mobile number pattern matching api. This api consist of more than 75 diffeent types of pattern used to write indian mobile numbers. It can validate all of these types of pattern. 
 2. It's good to store the numbers in some common format when you are working with a large data-source. 
+3. It's not only be used for validating a mobile number pattern bet we can also use it for transforming the incoming pattern into some standerd number format.
 ----
 
 #### Tools and Libraries use:
