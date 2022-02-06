@@ -17,3 +17,16 @@
 #### Tools to be use:
 1. Docekrization of whole api.
 2. Centralized Logging tool.
+
+
+#### Application Deployed on Heroku server:
+##### 1. Validating and transforming a single pattern:
+          **url**: https://patternapi1.herokuapp.com/api/v1/pattern/transformOne
+          **request body**: {
+                              "type": "2",  
+                              "phone": "9112345678",
+                              "index":"3"
+                         }
+                         
+          **response**: +91-911-2345678
+          
