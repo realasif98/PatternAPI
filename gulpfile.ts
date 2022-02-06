@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
-var notify = require("gulp-notify");
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json');
 var babel = require('gulp-babel');
