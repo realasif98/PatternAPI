@@ -21,12 +21,12 @@
 
 #### Application Deployed on Heroku server:
 ##### 1. Validating and transforming a single pattern:
-          **url**: https://patternapi1.herokuapp.com/api/v1/pattern/transformOne
-          **request body**: {
+          url: https://patternapi1.herokuapp.com/api/v1/pattern/transformOne
+          request body: {
                               "type": "2",  
                               "phone": "9112345678",
                               "index":"3"
                          }
                          
-          **response**: +91-911-2345678
+          response: +91-911-2345678
           
