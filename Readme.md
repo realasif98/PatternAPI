@@ -30,7 +30,7 @@
                          
           response: +91-911-2345678
           
-##### Validate and transform a list of pattern:
+##### 2. Validate and transform a list of pattern:
          url : https://patternapi1.herokuapp.com/api/v1/pattern/transformAll
            request body:[
               {
