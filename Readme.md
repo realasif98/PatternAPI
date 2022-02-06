@@ -30,3 +30,43 @@
                          
           response: +91-911-2345678
           
+##### Validate and transform a list of pattern:
+         url : https://patternapi1.herokuapp.com/api/v1/pattern/transformAll
+ request body:[
+    {
+    "type": "2",  
+    "phone": "9112345678",
+    "index":"5"
+    },
+     {
+     "countryCode":"+91-",
+    "type": "2",  
+    "phone": "9112345678",
+    "index":"3",
+    "separator": "-"
+    },
+    {
+    "type": "1", 
+    "countryCodeIncluded":true, 
+    "phone": "+919112345678"
+    },
+    {
+    "type": "1", 
+    "countryCodeIncluded":false, 
+    "phone": "+919112345678"
+    },
+     {
+    "type": "1", 
+    "countryCodeIncluded":false, 
+    "phone": "+919112345678"
+    }
+]
+
+respons: [
+    "+91-91123-45678",
+    "+91-911-2345678",
+    "+919112345678",
+    "Not a Valid Phone Number Pattern",
+    "Not a Valid Phone Number Pattern"
+]
+          
